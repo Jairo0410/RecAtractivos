@@ -16,15 +16,15 @@ class RecommendationModel{
     //$this->db = Connection::singleton();
 
     $this->servicios = array(
-      array(0,"Tiene senderos"),
-      array(1,"Ofrece comida vegetariana"),
-      array(2,"Tiene guias turisticos"),
-      array(3,"Venden souvenirs"),
-      array(4,"Hay lugares al aire libre"),
-      array(5,"Hay zona deportiva"),
-      array(4,"Existe acceso para discapacitados"),
-      array(4,"Hay areas de fumado"),
-      array(4,"Se permiten mascotas"),
+      "Tiene senderos",
+      "Ofrece comida vegetariana",
+      "Tiene guias turisticos",
+      "Tienen souvenirs a la venta",
+      "Poseen areas al aire libre",
+      "Poseen zonas deportivas",
+      "Es de fácil acceso para discapacitados",
+      "Posee zonas para fumadores",
+      "Permite el ingreso de mascotas",
     );
 
     $this->estereotipos = array(
