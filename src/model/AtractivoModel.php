@@ -94,6 +94,14 @@ class AtractivoModel{
     return $resultado;
   }
 
+  public function obtenerImagenesAtractivo($id_atractivo) : array{
+
+  }
+
+  public function obtenerVideosAtractivo($id_atractivo) : array{
+
+  }
+
 }
 
 ?>
