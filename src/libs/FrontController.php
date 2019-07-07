@@ -32,6 +32,8 @@
                 $controller->notFound($nameController.'->'.$action.' no existe');
                 return FALSE;
             }
+
+            session_start();
             
             $controller=new $nameController();
             $controller->$action();
