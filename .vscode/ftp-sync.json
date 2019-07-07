@@ -1,0 +1,28 @@
+{
+    "remotePath": "./public_html/expertos",
+    "host": "gibbo.xyz",
+    "username": "jairo0410@gibbo.xyz",
+    "password": "oEOpAone9c",
+    "port": 21,
+    "secure": false,
+    "protocol": "ftp",
+    "uploadOnSave": false,
+    "passive": false,
+    "debug": false,
+    "privateKeyPath": null,
+    "passphrase": null,
+    "agent": null,
+    "allow": [],
+    "ignore": [
+        "\\.vscode",
+        "\\sql",
+        "\\.git",
+        "\\.DS_Store"
+    ],
+    "generatedFiles": {
+        "extensionsToInclude": [
+            ""
+        ],
+        "path": ""
+    }
+}
