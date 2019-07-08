@@ -1,18 +1,22 @@
 <?php
-	include_once 'header.php';
-	$atractivo = $vars['atractivo'];
+	view('header.php');
+    $atractivo = $vars['atractivo'];
+    $servicios = isset($vars['servicios']) ? $vars['servicios'] : array();
 ?>
 
-	<h2 class="text-center"><?php echo $atractivo[1]; ?></h2>
+	<h2 class="text-center"><?= $atractivo->getNombre(); ?></h2>
 
 	<h4>Descripción de la oferta / promoción</h4>
 	<p><?php echo $atractivo[4]; ?></p>
 
 	<h4>Facilidades con las que dispone</h4>
+
+    <?php print_r($servicios); ?>
+
 	<ol>
-		<?php foreach ($atractivo[5] as $key => $value) {
-			echo '<li>' . $value[1] . '</li>';
-		} ?>
+		<?php foreach ($servicios as $key => $value) { ?>
+			<li> <?= $key .' : '. $value ?> </li>
+		<? } ?>
 	</ol>
 
 
@@ -41,6 +45,4 @@
         popup.open(map);
     </script>
 
-<?php
-  	include_once 'footer.php';
-?>
+<?= view('footer.php') ?>
