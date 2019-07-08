@@ -3,6 +3,10 @@
     class FrontController{
         
         static function main(){
+            if(!isset($_SESSION)){
+                session_start();
+            }
+
             require __DIR__.'/Constants.php';
            
             if(!empty($_GET['controller']))
@@ -32,8 +36,6 @@
                 $controller->notFound($nameController.'->'.$action.' no existe');
                 return FALSE;
             }
-
-            session_start();
             
             $controller=new $nameController();
             $controller->$action();
