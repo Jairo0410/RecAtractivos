@@ -75,9 +75,25 @@ class RecommendationModel{
     return 'Atractivo agregado';
   }
 
-  public function calcularDiferencias($senderos, $vegetariana,  $guia, $souvenirs, $aire_libre, $zona_deportiva, $discapacitado, $zona_fumado, $animales){
+  public function calcularDiferenciasEstricto($senderos, $vegetariana,  $guia, $souvenirs, $aire_libre, $zona_deportiva, $discapacitado, $zona_fumado, $animales){
     $db = Connection::singleton();
-    $smt = $db->prepare("call SP_Obtener_Distancias($senderos, $vegetariana, $guia, $souvenirs, $aire_libre, $zona_deportiva, $discapacitado, $zona_fumado, $animales)");
+
+    $query = "SELECT Id_Lugar, Nombre, SQRT(
+      CONVERT($senderos XOR Senderos, unsigned) +
+      CONVERT($vegetariana XOR Comida_Vegetariana, unsigned) +
+      CONVERT($guia XOR Guias_Turisticos, unsigned) +
+      CONVERT($souvenirs XOR Souvenirs, unsigned) +
+      CONVERT($aire_libre XOR Aire_Libre, unsigned) +
+      CONVERT($zona_deportiva XOR Zona_Deportiva, unsigned) +
+      CONVERT($discapacitado XOR Discapacitado, unsigned) +
+      CONVERT($zona_fumado XOR Fumado, unsigned) +
+      CONVERT($animales XOR Animales, unsigned))
+      as Distancia
+      FROM ".TBL_LUGAR_ESTILO.", ".TBL_LUGAR.
+      " WHERE ".TBL_LUGAR_ESTILO.".Id_Lugar = ".TBL_LUGAR.".Id
+      ORDER BY Distancia ASC";
+
+    $smt = $db->prepare($query);
     
     $smt->execute();
 
@@ -86,23 +102,34 @@ class RecommendationModel{
     return $resultado;
   }
 
-  /*
-    Servicio
-      id
-      nombre
+  public function calcularDiferenciasPermisivo($senderos, $vegetariana,  $guia, $souvenirs, $aire_libre, $zona_deportiva, $discapacitado, $zona_fumado, $animales){
+    $db = Connection::singleton();
 
-    Estereotipo
-      String nombre 
-      array<Servicio> servicios
+    $query = "SELECT Id_Lugar, Nombre, SQRT(
+      CONVERT($senderos AND NOT Senderos, unsigned) +
+      CONVERT($vegetariana AND NOT Comida_Vegetariana, unsigned) +
+      CONVERT($guia AND NOT Guias_Turisticos, unsigned) +
+      CONVERT($souvenirs AND NOT Souvenirs, unsigned) +
+      CONVERT($aire_libre AND NOT Aire_Libre, unsigned) +
+      CONVERT($zona_deportiva AND NOT Zona_Deportiva, unsigned) +
+      CONVERT($discapacitado AND NOT Discapacitado, unsigned) +
+      CONVERT($zona_fumado AND NOT Fumado, unsigned) +
+      CONVERT($animales AND NOT Animales, unsigned))
+      as Distancia
+      FROM ".TBL_LUGAR_ESTILO.", ".TBL_LUGAR.
+      " WHERE ".TBL_LUGAR_ESTILO.".Id_Lugar = ".TBL_LUGAR.".Id
+      ORDER BY Distancia ASC";
 
-    Atractivo
-      id
-      nombre
-      latitud
-      longitud
-      descripcion
-      array<Servicio> servicios
-    */
+    echo $query;
+
+    $smt = $db->prepare($query);
+    
+    $smt->execute();
+
+    $resultado = $smt->fetchAll();
+
+    return $resultado;
+  }
 
 }
 
