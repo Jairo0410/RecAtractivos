@@ -33,7 +33,7 @@
                 return FALSE;
             }
 
-            session_start();
+            //session_start();
             
             $controller=new $nameController();
             $controller->$action();

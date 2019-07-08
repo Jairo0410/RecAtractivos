@@ -93,13 +93,69 @@ class AtractivoModel{
 
     return $resultado;
   }
+  
+  public function agregarImagenAtractivo($idAtractivo, $name){
+   
+    $db = Connection::singleton();
+    
+    $query = "INSERT INTO ". TBL_IMAGEN_ATRACTIVO ." (id, idLugar, rutaImagen) values (NULL, '$idAtractivo' ,'$name');";
+    
+    $smt = $db->prepare($query);
+
+    $smt->execute();
+    
+  }
+  
+  public function agregarVideoAtractivo($idAtractivo, $name){
+   
+    $db = Connection::singleton();
+    
+    $query = "INSERT INTO ". TBL_VIDEO_ATRACTIVO ." (id, idLugar, rutaImagen) values (NULL, '$idAtractivo' ,'$name');";
+    
+    $smt = $db->prepare($query);
+
+    $smt->execute();
+    
+  }
 
   public function obtenerImagenesAtractivo($id_atractivo) : array{
+    $db = Connection::singleton();
+    $smt = $db->prepare("SELECT id, idLugar, rutaImagen  from ".TBL_IMAGEN_ATRACTIVO." where idLugar = '$id_atractivo'");
+    
+    $smt->execute();
 
+    $smt->bindColumn(1, $id);
+    $smt->bindColumn(2, $lugar);
+    $smt->bindColumn(3, $imagen);
+
+    $imagenes = array();
+
+    while($smt->fetch(PDO::FETCH_BOUND)){
+      $img = array($id, $lugar, $imagen); 
+      array_push($imagenes, $img);
+    }
+
+    return $imagenes;
   }
 
   public function obtenerVideosAtractivo($id_atractivo) : array{
+      $db = Connection::singleton();
+    $smt = $db->prepare("SELECT id, idLugar, rutaImagen  from ".TBL_VIDEO_ATRACTIVO." where idLugar = '$id_atractivo'");
+    
+    $smt->execute();
 
+    $smt->bindColumn(1, $id);
+    $smt->bindColumn(2, $lugar);
+    $smt->bindColumn(3, $video);
+
+    $videos = array();
+
+    while($smt->fetch(PDO::FETCH_BOUND)){
+      $v = array($id, $lugar, $video); 
+      array_push($videos, $v);
+    }
+
+    return $videos;
   }
 
 }
