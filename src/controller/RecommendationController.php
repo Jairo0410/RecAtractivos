@@ -19,8 +19,6 @@ class RecommendationController{
     require_once routeModel.'RecommendationModel.php';
     $model = new RecommendationModel();
 
-    $servicios = $model->getServicios();
-
     $senderos = isset($_POST[ "cbx0" ]) ? $_POST[ "cbx0" ] : 0;
     $vegetariana = isset($_POST[ "cbx1" ]) ? $_POST[ "cbx1" ] : 0;
     $guias = isset($_POST[ "cbx2" ]) ? $_POST[ "cbx2" ] : 1;
@@ -31,7 +29,10 @@ class RecommendationController{
     $fumado = isset($_POST[ "cbx7" ]) ? $_POST[ "cbx7" ] : 0;
     $animales = isset($_POST[ "cbx8" ]) ? $_POST[ "cbx8" ] : 0;
 
-    $data['atractivos'] = $model->calcularDiferencias($senderos, $vegetariana, $guias, $souvenirs, $aire_libre, $zona_deportiva, $discapacitados, $fumado, $animales);
+    $data['atractivos'] = $model->calcularDiferenciasEstricto($senderos, $vegetariana, $guias, 
+      $souvenirs, $aire_libre, $zona_deportiva, $discapacitados, $fumado, $animales);
+
+    //print_r($data['atractivos']);
 
   	view('buscarRecomendaciones.php', $data);
   }
