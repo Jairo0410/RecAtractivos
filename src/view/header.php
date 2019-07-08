@@ -12,8 +12,7 @@
     <title><?= isset($title) ? $title : "Proyecto Web Expertos"; ?></title>
   </head>
   <body style="background-image: url('public/assets/background.jpg');  background-attachment: fixed;">
-    <div style="display: grid; background-color: rgba(255,255,255,0.5);">
-    	<?php 
-    		view('navbar.php');
-    	?>
+  <?= view('navbar.php'); ?>
+    <div class="container-fluid" style="background-color: rgba(255, 255, 255, 0.7)">
+    	
     

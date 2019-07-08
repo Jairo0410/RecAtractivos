@@ -1,10 +1,10 @@
 <?php
 // variables para la conexion con la base de datos
 define("BD_TYPE", "mysql");
-define("host", "localhost");//"sql9.freemysqlhosting.net");
-define("user", "root");//"sql9296819");
-define("password", "");//"xphmJ9rmy2");
-define("default_schema", "expertos");//"sql9296819");
+define("host", "remotemysql.com");
+define("user", "e65zwlNc8m");
+define("password", "9DArryFsBS");
+define("default_schema", "e65zwlNc8m");
 
 define("GOOGLE_MAPS_API_KEY", "AIzaSyCvKIF8uhB8umbV0gBZpHYX2CF7xL2Zfdc");
 
